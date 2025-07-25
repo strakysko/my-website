@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dávid Straka - Data Scientist & ML Engineer</title>
+    <title>Dávid Straka - Quantum in Financial Maths</title>
     <style>
         * {
             margin: 0;
@@ -205,6 +205,10 @@
             color: white;
         }
 
+        .skills-section .section-title {
+            color: white;
+        }
+
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -250,9 +254,18 @@
         }
 
         .contact-section {
-            background: #2d3748;
-            color: white;
+            background: #f8fafc;
+            color: #2d3748;
             text-align: center;
+        }
+
+        .contact-section .section-title {
+            color: #2d3748;
+        }
+
+        .contact-section p {
+            color: #2d3748;
+            opacity: 0.9;
         }
 
         .contact-info {
@@ -328,11 +341,25 @@
         <section class="hero">
             <div class="container">
                 <h1>Dávid Straka</h1>
-                <p class="subtitle">Data Scientist & Machine Learning Engineer</p>
+                <p class="subtitle">Quantum in Financial Maths</p>
                 <p class="location">📍 Amsterdam, Netherlands</p>
                 <div class="cta-buttons">
                     <a href="#contact" class="btn btn-primary">Get In Touch</a>
                     <a href="https://linkedin.com/in/davidstrak" class="btn btn-secondary" target="_blank">LinkedIn Profile</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="card" style="max-width: 800px; margin: 0 auto; text-align: center;">
+                    <p style="font-size: 1.1rem; line-height: 1.8;">
+                        MSc student in Stochastics & Financial Mathematics (UvA), currently applying quantum computing to portfolio optimization at TNO by reformulating problems as QUBOs. I'm drawn to complex, impactful challenges - especially those that blend math, code, and real-world uncertainty.
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 1rem;">
+                        Previously, I supported teaching in calculus and linear algebra as a TA and worked on NLP models for legal texts. I enjoy collaborating across disciplines and cultures, and I'm always looking for opportunities to learn and build meaningful solutions.
+                    </p>
                 </div>
             </div>
         </section>
@@ -350,7 +377,7 @@
                     </div>
                     
                     <div class="card">
-                        <h3>MSc Erasmus in Fundamental Principles of Data Science</h3>
+                        <h3>Erasmus MSc in Fundamental Principles of Data Science</h3>
                         <div class="institution">Universitat de Barcelona & Universitat Politècnica de Catalunya</div>
                         <div class="location-date">Barcelona, Spain • Ongoing</div>
                         <p><strong>Focus:</strong> Statistics and Operations Research</p>
@@ -384,14 +411,26 @@
                 <h2 class="section-title">Work Experience</h2>
                 <div class="experience-grid">
                     <div class="card">
-                        <h3>Machine Learning Engineer</h3>
-                        <div class="institution">Dutch Summer of AI at Company.info</div>
-                        <div class="location-date">Amsterdam, Netherlands • Summer 2022</div>
+                        <h3>Research Project Intern</h3>
+                        <div class="institution">TNO</div>
+                        <div class="location-date">The Hague, Netherlands (Hybrid) • Mar 2025 - Present</div>
+                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                            <li>Applying quantum computing to solve portfolio optimization problems by formulating them as Quadratic Unconstrained Binary Optimization (QUBO) problems</li>
+                            <li>Researching the intersection of quantum algorithms and financial mathematics</li>
+                            <li>Contributing to cutting-edge developments in quantum-enhanced optimization techniques</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Machine Learning Intern</h3>
+                        <div class="institution">Company.info Nederland</div>
+                        <div class="location-date">Amsterdam, Netherlands • Jul 2022 - Aug 2022</div>
                         <ul style="margin-top: 1rem; padding-left: 1.5rem;">
                             <li>Accurately linked Dutch companies to their relevant lawsuits using advanced ML techniques</li>
-                            <li>Collaborated in an international team of 5 interns to build and train a conditional random field model for recognizing relevant name entities in legal texts</li>
+                            <li>Collaborated in an international team of 5 interns to build and train a conditional random field model that recognizes relevant name entities in legal texts</li>
                             <li>Participated in a challenging hackathon organized by Google at ABN AMRO</li>
-                            <li>Explored Shell's Energy Transition Campus and engaged with AI projects at major companies including ABN AMRO, AEGON, DSM, KPN, NS, Shell, SouthPole, and Tata Steel</li>
+                            <li>Explored Shell's Energy Transition Campus and followed Google's presentations about challenges and ethical dilemmas in AI</li>
+                            <li>Got acquainted with AI projects at major companies including ABN AMRO, AEGON, DSM, KPN, NS, Shell, SouthPole, and Tata Steel</li>
                         </ul>
                     </div>
                     
@@ -403,16 +442,6 @@
                             <li>Guided 20 students weekly through challenging questions in Calculus and Linear Algebra</li>
                             <li>Adapted teaching methods for both online and in-person instruction</li>
                             <li>Proctored online exams and co-graded 100 exams bimonthly</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>Host</h3>
-                        <div class="institution">DUWO (Student Housing Provider)</div>
-                        <div class="location-date">Amsterdam, Netherlands • Summer 2020</div>
-                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
-                            <li>Provided keys and assistance to numerous new tenants finding their accommodation</li>
-                            <li>Communicated effectively to resolve tenant housing problems and concerns</li>
                         </ul>
                     </div>
                 </div>
@@ -442,6 +471,9 @@
                     <div class="skill-category">
                         <h3>Specializations</h3>
                         <div class="skill-tags">
+                            <span class="skill-tag">Quantum Computing</span>
+                            <span class="skill-tag">Portfolio Optimization</span>
+                            <span class="skill-tag">QUBO Problems</span>
                             <span class="skill-tag">Machine Learning</span>
                             <span class="skill-tag">Data Science</span>
                             <span class="skill-tag">Statistical Analysis</span>
@@ -480,24 +512,24 @@
 
         <section id="contact" class="section contact-section">
             <div class="container">
-                <h2 class="section-title">Let's Connect</h2>
-                <p>Interested in data science, machine learning, or mathematical modeling? Let's discuss how we can work together.</p>
+                <h2 class="section-title" style="color: #2d3748 !important;">Let's Connect</h2>
+                <p style="color: #2d3748 !important; font-size: 1.1rem; margin-bottom: 2rem;">Interested in data science, machine learning, or mathematical modeling? Let's discuss how we can work together.</p>
                 <div class="contact-info">
                     <div class="contact-item">
-                        <span>📧</span>
-                        <a href="mailto:davidstraka@gmail.com">davidstraka@gmail.com</a>
+                        <span style="color: #2d3748;">📧</span>
+                        <a href="mailto:davidstraka@gmail.com" style="color: #2d3748 !important;">davidstraka@gmail.com</a>
                     </div>
                     <div class="contact-item">
-                        <span>📱</span>
-                        <a href="tel:+31658832136">+31 658 832 136</a>
+                        <span style="color: #2d3748;">📱</span>
+                        <a href="tel:+31658832136" style="color: #2d3748 !important;">+31 658 832 136</a>
                     </div>
                     <div class="contact-item">
-                        <span>💼</span>
-                        <a href="https://linkedin.com/in/davidstrak" target="_blank">LinkedIn Profile</a>
+                        <span style="color: #2d3748;">💼</span>
+                        <a href="https://linkedin.com/in/davidstrak" target="_blank" style="color: #2d3748 !important;">LinkedIn Profile</a>
                     </div>
                     <div class="contact-item">
-                        <span>📍</span>
-                        <span>Amsterdam, Netherlands</span>
+                        <span style="color: #2d3748;">📍</span>
+                        <span style="color: #2d3748 !important;">Amsterdam, Netherlands</span>
                     </div>
                 </div>
             </div>
