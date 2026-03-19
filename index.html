@@ -1,588 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dávid Straka - Quantum in Financial Maths</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #667eea;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #667eea;
-        }
-
-        main {
-            margin-top: 80px;
-        }
-
-        .hero {
-            padding: 6rem 0;
-            text-align: center;
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero .subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        .hero .location {
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
-            opacity: 0.8;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.6s both;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: white;
-            color: #667eea;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: #667eea;
-        }
-
-        .section {
-            padding: 5rem 0;
-            background: white;
-        }
-
-        .section:nth-child(even) {
-            background: #f8fafc;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: #2d3748;
-        }
-
-        .education-grid, .experience-grid {
-            display: grid;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .card h3 {
-            color: #667eea;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .card .institution {
-            font-weight: 600;
-            color: #4a5568;
-            margin-bottom: 0.5rem;
-        }
-
-        .card .location-date {
-            color: #718096;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .card .grade {
-            background: #e6fffa;
-            color: #00a085;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-
-        .skills-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .skills-section .section-title {
-            color: white;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-
-        .skill-category h3 {
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .skill-tag {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            backdrop-filter: blur(5px);
-        }
-
-        .language-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .language-item {
-            text-align: center;
-            padding: 1rem;
-        }
-
-        .contact-section {
-            background: #f8fafc;
-            color: #2d3748;
-            text-align: center;
-        }
-
-        .contact-section .section-title {
-            color: #2d3748;
-        }
-
-        .contact-section p {
-            color: #2d3748;
-            opacity: 0.9;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .contact-item a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .contact-item a:hover {
-            color: #667eea;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <nav>
-            <div class="logo">Dávid Straka</div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>D&aacute;vid Straka | Quantitative Portfolio</title>
+    <meta
+      name="description"
+      content="Personal website of D&aacute;vid Straka, a mathematics and financial mathematics graduate student focused on data analysis, machine learning, and quantitative research."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="wordmark" href="#home">D&aacute;vid Straka</a>
+        <nav class="nav">
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
         </nav>
-    </header>
+      </header>
 
-    <main>
+      <main id="home">
         <section class="hero">
-            <div class="container">
-                <h1>Dávid Straka</h1>
-                <p class="subtitle">Quantum in Financial Maths</p>
-                <p class="location">📍 Amsterdam, Netherlands</p>
-                <div class="cta-buttons">
-                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                    <a href="https://linkedin.com/in/davidstrak" class="btn btn-secondary" target="_blank">LinkedIn Profile</a>
-                </div>
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Amsterdam-based quantitative mind</p>
+            <h1>
+              Mathematics, machine learning, and human curiosity in one
+              direction.
+            </h1>
+            <p class="hero-text">
+              I am D&aacute;vid Straka, an MSc student in Stochastics and Financial
+              Mathematics at the University of Amsterdam with experience across
+              quantitative research, machine learning, teaching, and operations.
+              My work sits at the intersection of rigorous analysis, practical
+              problem-solving, and clear communication.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="mailto:davidstraka@gmail.com"
+                >Email me</a
+              >
+              <a
+                class="button button-secondary"
+                href="./assets/docs/David-Straka-CV.pdf"
+                download
+                >Download CV</a
+              >
+              <a
+                class="button button-secondary"
+                href="https://www.linkedin.com/in/davidstrak"
+                target="_blank"
+                rel="noreferrer"
+                >LinkedIn</a
+              >
             </div>
+          </div>
+
+          <aside class="hero-panel reveal">
+            <div class="panel-orbit"></div>
+            <div class="hero-card hero-card-main">
+              <p class="card-label">Current focus</p>
+              <h2>Quantum annealing, optimization, and statistical learning.</h2>
+              <p>
+                Exploring how mathematical structure can turn complex decisions
+                into elegant, computable systems.
+              </p>
+            </div>
+            <div class="hero-metrics">
+              <article class="metric-card">
+                <span>2025</span>
+                <p>TNO research internship in quantum portfolio optimization</p>
+              </article>
+              <article class="metric-card">
+                <span>5+</span>
+                <p>Countries, disciplines, and work contexts navigated fluently</p>
+              </article>
+              <article class="metric-card">
+                <span>8.0</span>
+                <p>BSc Mathematics GPA at Vrije Universiteit Amsterdam</p>
+              </article>
+            </div>
+          </aside>
         </section>
 
-        <section id="about" class="section">
-            <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="card" style="max-width: 800px; margin: 0 auto; text-align: center;">
-                    <p style="font-size: 1.1rem; line-height: 1.8;">
-                        MSc student in Stochastics & Financial Mathematics (UvA), currently applying quantum computing to portfolio optimization at TNO by reformulating problems as QUBOs. I'm drawn to complex, impactful challenges - especially those that blend math, code, and real-world uncertainty.
-                    </p>
-                    <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 1rem;">
-                        Previously, I supported teaching in calculus and linear algebra as a TA and worked on NLP models for legal texts. I enjoy collaborating across disciplines and cultures, and I'm always looking for opportunities to learn and build meaningful solutions.
-                    </p>
-                </div>
-            </div>
+        <section class="section intro-grid" id="about">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Profile</p>
+            <h2>An analytical background with range.</h2>
+          </div>
+          <div class="intro-cards">
+            <article class="glass-card reveal">
+              <p class="card-label">What I do</p>
+              <p>
+                I build strong quantitative foundations through probability,
+                optimization, computational finance, and machine learning.
+              </p>
+            </article>
+            <article class="glass-card reveal">
+              <p class="card-label">How I work</p>
+              <p>
+                I like difficult problems, structured thinking, and making
+                technical ideas understandable to the people around me.
+              </p>
+            </article>
+            <article class="glass-card reveal">
+              <p class="card-label">Outside work</p>
+              <p>
+                Padel, piano, gym, running, cinema club, and storytelling keep
+                me sharp, grounded, and creative.
+              </p>
+            </article>
+          </div>
         </section>
 
-        <section id="education" class="section">
-            <div class="container">
-                <h2 class="section-title">Education</h2>
-                <div class="education-grid">
-                    <div class="card">
-                        <h3>MSc in Stochastics and Financial Mathematics</h3>
-                        <div class="institution">Universiteit van Amsterdam</div>
-                        <div class="location-date">Amsterdam, Netherlands • Ongoing</div>
-                        <p><strong>Track:</strong> Data Analysis and Statistics</p>
-                        <p><strong>Relevant courses:</strong> Measure Theoretic Probability, Quantum Information Theory, Stochastic Simulation, Asymptotic Statistics</p>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>Erasmus MSc in Fundamental Principles of Data Science</h3>
-                        <div class="institution">Universitat de Barcelona & Universitat Politècnica de Catalunya</div>
-                        <div class="location-date">Barcelona, Spain • Ongoing</div>
-                        <p><strong>Focus:</strong> Statistics and Operations Research</p>
-                        <p><strong>Relevant courses:</strong> Optimization, Numerical Linear Algebra, Machine Learning, Generalized Linear Models</p>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>BSc in Mathematics</h3>
-                        <div class="institution">Vrije Universiteit Amsterdam</div>
-                        <div class="location-date">Amsterdam, Netherlands</div>
-                        <div class="grade">Average Grade: 8.0/10</div>
-                        <p><strong>Track:</strong> Data Science</p>
-                        <p><strong>Thesis:</strong> Comparison of the Competing risk forest to the Cox model</p>
-                        <p><strong>Relevant courses:</strong> Probability Theory, Data Structures and Algorithms, Introduction to Programming (Java), Markov Chains</p>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>International Baccalaureate (IB)</h3>
-                        <div class="institution">Gymnázium Jura Hronca</div>
-                        <div class="location-date">Bratislava, Slovakia</div>
-                        <p><strong>Bilingual Diploma</strong></p>
-                        <p><strong>Higher Level:</strong> English, Mathematics, Biology</p>
-                        <p><strong>Standard Level:</strong> Slovak Language, Chemistry, Economics</p>
-                    </div>
-                </div>
-            </div>
+        <section class="section downloads-section">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Downloads</p>
+            <h2>Selected documents for a closer look.</h2>
+          </div>
+          <div class="downloads-grid">
+            <article class="download-card reveal">
+              <p class="card-label">CV</p>
+              <h3>Professional profile</h3>
+              <p>
+                A concise overview of my education, experience, skills, and
+                interests.
+              </p>
+              <a
+                class="text-link"
+                href="./assets/docs/David-Straka-CV.pdf"
+                download
+                >Download CV</a
+              >
+            </article>
+            <article class="download-card reveal">
+              <p class="card-label">Master's thesis</p>
+              <h3>Optimization with Quantum Annealing</h3>
+              <p>
+                MSc thesis on mean-expected shortfall portfolio optimization,
+                QUBO reformulation, and quantum annealing feasibility.
+              </p>
+              <a
+                class="text-link"
+                href="./assets/docs/David-Straka-Masters-Thesis.pdf"
+                download
+                >Download Master's thesis</a
+              >
+            </article>
+            <article class="download-card reveal">
+              <p class="card-label">Bachelor's thesis</p>
+              <h3>Survival analysis comparison study</h3>
+              <p>
+                BSc thesis comparing competing risk forests with a statistical
+                Cox model in survival analysis.
+              </p>
+              <a
+                class="text-link"
+                href="./assets/docs/David-Straka-Bachelors-Thesis.pdf"
+                download
+                >Download Bachelor's thesis</a
+              >
+            </article>
+          </div>
         </section>
 
-        <section id="experience" class="section">
-            <div class="container">
-                <h2 class="section-title">Work Experience</h2>
-                <div class="experience-grid">
-                    <div class="card">
-                        <h3>Research Project Intern</h3>
-                        <div class="institution">TNO</div>
-                        <div class="location-date">The Hague, Netherlands (Hybrid) • Mar 2025 - Present</div>
-                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
-                            <li>Applying quantum computing to solve portfolio optimization problems by formulating them as Quadratic Unconstrained Binary Optimization (QUBO) problems</li>
-                            <li>Researching the intersection of quantum algorithms and financial mathematics</li>
-                            <li>Contributing to cutting-edge developments in quantum-enhanced optimization techniques</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>Machine Learning Intern</h3>
-                        <div class="institution">Company.info Nederland</div>
-                        <div class="location-date">Amsterdam, Netherlands • Jul 2022 - Aug 2022</div>
-                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
-                            <li>Accurately linked Dutch companies to their relevant lawsuits using advanced ML techniques</li>
-                            <li>Collaborated in an international team of 5 interns to build and train a conditional random field model that recognizes relevant name entities in legal texts</li>
-                            <li>Participated in a challenging hackathon organized by Google at ABN AMRO</li>
-                            <li>Explored Shell's Energy Transition Campus and followed Google's presentations about challenges and ethical dilemmas in AI</li>
-                            <li>Got acquainted with AI projects at major companies including ABN AMRO, AEGON, DSM, KPN, NS, Shell, SouthPole, and Tata Steel</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>Calculus and Linear Algebra Teaching Assistant</h3>
-                        <div class="institution">Vrije Universiteit Amsterdam</div>
-                        <div class="location-date">Amsterdam, Netherlands • Sep 2020 – June 2021</div>
-                        <ul style="margin-top: 1rem; padding-left: 1.5rem;">
-                            <li>Guided 20 students weekly through challenging questions in Calculus and Linear Algebra</li>
-                            <li>Adapted teaching methods for both online and in-person instruction</li>
-                            <li>Proctored online exams and co-graded 100 exams bimonthly</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <section class="section spotlight" id="work">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Selected work</p>
+            <h2>Recent experiences that best represent my direction.</h2>
+          </div>
+          <div class="spotlight-grid">
+            <article class="feature-card reveal">
+              <div class="feature-topline">
+                <span>TNO</span>
+                <span>The Hague · 2025</span>
+              </div>
+              <h3>Research Project Intern</h3>
+              <p>
+                Reviewed financial risk measures, selected expected shortfall for
+                portfolio optimization, and reformulated the problem into QUBO
+                forms suitable for a D-Wave quantum annealer.
+              </p>
+              <ul>
+                <li>Derived mathematical bounds to preserve annealer compatibility.</li>
+                <li>
+                  Optimized S&amp;P 500 constituent portfolios to validate the
+                  practical use of expected shortfall in annealing.
+                </li>
+              </ul>
+            </article>
+
+            <article class="feature-card reveal">
+              <div class="feature-topline">
+                <span>Company.info</span>
+                <span>Amsterdam · Summer 2022</span>
+              </div>
+              <h3>Machine Learning Intern</h3>
+              <p>
+                Worked in an international team of five on named entity
+                recognition for legal texts and company-lawsuit linking.
+              </p>
+              <ul>
+                <li>
+                  Trained a conditional random field model for legal-domain entity
+                  extraction.
+                </li>
+                <li>
+                  Participated in Google and ABN AMRO AI events covering practical
+                  and ethical challenges in the field.
+                </li>
+              </ul>
+            </article>
+
+            <article class="feature-card reveal">
+              <div class="feature-topline">
+                <span>Vrije Universiteit Amsterdam</span>
+                <span>2020 to 2021</span>
+              </div>
+              <h3>Teaching Assistant</h3>
+              <p>
+                Led tutorials in Calculus and Linear Algebra, guided students
+                individually, and supported fair, high-volume assessment.
+              </p>
+              <ul>
+                <li>Ran weekly sessions for around 20 BSc students.</li>
+                <li>
+                  Co-graded roughly 100 exams every two months and handled
+                  regrade requests carefully.
+                </li>
+              </ul>
+            </article>
+          </div>
         </section>
 
-        <section id="skills" class="section skills-section">
-            <div class="container">
-                <h2 class="section-title">Skills & Languages</h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3>Programming & Tools</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">sklearn</span>
-                            <span class="skill-tag">TensorFlow</span>
-                            <span class="skill-tag">CVXPY</span>
-                            <span class="skill-tag">SciPy</span>
-                            <span class="skill-tag">R</span>
-                            <span class="skill-tag">SQL</span>
-                            <span class="skill-tag">Java</span>
-                            <span class="skill-tag">MATLAB</span>
-                            <span class="skill-tag">Mathematica</span>
-                        </div>
-                    </div>
-                    
-                    <div class="skill-category">
-                        <h3>Specializations</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Quantum Computing</span>
-                            <span class="skill-tag">Portfolio Optimization</span>
-                            <span class="skill-tag">QUBO Problems</span>
-                            <span class="skill-tag">Machine Learning</span>
-                            <span class="skill-tag">Data Science</span>
-                            <span class="skill-tag">Statistical Analysis</span>
-                            <span class="skill-tag">Stochastic Modeling</span>
-                            <span class="skill-tag">Financial Mathematics</span>
-                            <span class="skill-tag">Natural Language Processing</span>
-                            <span class="skill-tag">Optimization</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="language-grid">
-                    <div class="language-item">
-                        <h4>Slovak</h4>
-                        <p>Native</p>
-                    </div>
-                    <div class="language-item">
-                        <h4>Czech</h4>
-                        <p>Fluent</p>
-                    </div>
-                    <div class="language-item">
-                        <h4>English</h4>
-                        <p>Fluent</p>
-                    </div>
-                    <div class="language-item">
-                        <h4>Dutch</h4>
-                        <p>B2</p>
-                    </div>
-                    <div class="language-item">
-                        <h4>German</h4>
-                        <p>A2</p>
-                    </div>
-                </div>
-            </div>
+        <section class="section timeline-section">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Experience timeline</p>
+            <h2>A path shaped by both technical depth and real-world range.</h2>
+          </div>
+          <div class="timeline">
+            <article class="timeline-item reveal">
+              <span class="timeline-year">2025</span>
+              <div>
+                <h3>TNO</h3>
+                <p>Research Project Intern in quantitative finance and quantum optimization.</p>
+              </div>
+            </article>
+            <article class="timeline-item reveal">
+              <span class="timeline-year">2022</span>
+              <div>
+                <h3>Company.info</h3>
+                <p>Machine Learning Intern working on legal-text entity recognition.</p>
+              </div>
+            </article>
+            <article class="timeline-item reveal">
+              <span class="timeline-year">2020 to 2021</span>
+              <div>
+                <h3>Vrije Universiteit Amsterdam</h3>
+                <p>Teaching Assistant for Calculus and Linear Algebra.</p>
+              </div>
+            </article>
+            <article class="timeline-item reveal">
+              <span class="timeline-year">2018 to 2022</span>
+              <div>
+                <h3>Across education, logistics, service, and freelancing</h3>
+                <p>
+                  Experience spanning language teaching, delivery work, student
+                  support, community hosting, warehousing, and customer-facing
+                  roles.
+                </p>
+              </div>
+            </article>
+          </div>
         </section>
 
-        <section id="contact" class="section contact-section">
-            <div class="container">
-                <h2 class="section-title" style="color: #2d3748 !important;">Let's Connect</h2>
-                <p style="color: #2d3748 !important; font-size: 1.1rem; margin-bottom: 2rem;">Interested in data science, machine learning, or mathematical modeling? Let's discuss how we can work together.</p>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span style="color: #2d3748;">📧</span>
-                        <a href="mailto:davidstraka@gmail.com" style="color: #2d3748 !important;">davidstraka@gmail.com</a>
-                    </div>
-                    <div class="contact-item">
-                        <span style="color: #2d3748;">📱</span>
-                        <a href="tel:+31658832136" style="color: #2d3748 !important;">+31 658 832 136</a>
-                    </div>
-                    <div class="contact-item">
-                        <span style="color: #2d3748;">💼</span>
-                        <a href="https://linkedin.com/in/davidstrak" target="_blank" style="color: #2d3748 !important;">LinkedIn Profile</a>
-                    </div>
-                    <div class="contact-item">
-                        <span style="color: #2d3748;">📍</span>
-                        <span style="color: #2d3748 !important;">Amsterdam, Netherlands</span>
-                    </div>
-                </div>
-            </div>
+        <section class="section education-section" id="education">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Education</p>
+            <h2>Built on mathematics, statistics, and international study.</h2>
+          </div>
+          <div class="education-grid">
+            <article class="education-card reveal">
+              <p class="card-label">2023 to 2026</p>
+              <h3>Universiteit van Amsterdam</h3>
+              <p>
+                MSc in Stochastics and Financial Mathematics, track Data Analysis
+                and Statistics.
+              </p>
+              <p class="muted">
+                Relevant courses include measure theoretic probability,
+                computational finance, stochastic simulation, and asymptotic
+                statistics.
+              </p>
+            </article>
+            <article class="education-card reveal">
+              <p class="card-label">2024</p>
+              <h3>Barcelona study abroad</h3>
+              <p>
+                MSc studies in Fundamental Principles of Data Science and in
+                Statistics and Operations Research.
+              </p>
+              <p class="muted">
+                Focused on optimization, numerical linear algebra, machine
+                learning, and generalized linear models.
+              </p>
+            </article>
+            <article class="education-card reveal">
+              <p class="card-label">2019 to 2023</p>
+              <h3>Vrije Universiteit Amsterdam</h3>
+              <p>BSc in Mathematics, track Data Science, GPA 8.0/10.</p>
+              <p class="muted">
+                Thesis comparing competing risk forests with a statistical Cox
+                model in survival analysis.
+              </p>
+            </article>
+          </div>
         </section>
-    </main>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+        <section class="section skills-section">
+          <div class="skills-layout">
+            <div class="section-heading reveal">
+              <p class="eyebrow">Skills</p>
+              <h2>Technical fluency, communication, and multilingual range.</h2>
+            </div>
+            <div class="skills-groups">
+              <article class="skill-block reveal">
+                <h3>Programming</h3>
+                <p>Python, R, SQL, Java, MATLAB, Mathematica</p>
+              </article>
+              <article class="skill-block reveal">
+                <h3>Python stack</h3>
+                <p>scikit-learn, TensorFlow, CVXPY, SciPy, NumPy</p>
+              </article>
+              <article class="skill-block reveal">
+                <h3>Languages</h3>
+                <p>Slovak, English, Czech, Dutch</p>
+              </article>
+              <article class="skill-block reveal">
+                <h3>Interests</h3>
+                <p>Padel, piano, gym, running, cinema club, storytelling</p>
+              </article>
+            </div>
+          </div>
+        </section>
 
-        // Add scroll effect to navbar
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-            }
-        });
+        <section class="section quote-section reveal">
+          <blockquote>
+            I am most interested in work where mathematical precision meets
+            practical impact, and where depth does not come at the cost of
+            clarity.
+          </blockquote>
+        </section>
+      </main>
 
-        // Animate cards on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+      <footer class="footer section" id="contact">
+        <div class="footer-copy reveal">
+          <p class="eyebrow">Contact</p>
+          <h2>Let’s build something rigorous and useful.</h2>
+          <p>
+            Based in Amsterdam and open to conversations around quantitative
+            research, data science, machine learning, and analytically demanding
+            roles.
+          </p>
+        </div>
+        <div class="footer-links reveal">
+          <a href="mailto:davidstraka@gmail.com">davidstraka@gmail.com</a>
+          <a href="tel:+31658832136">+31 658 832 136</a>
+          <a
+            href="https://www.linkedin.com/in/davidstrak"
+            target="_blank"
+            rel="noreferrer"
+            >linkedin.com/in/davidstrak</a
+          >
+        </div>
+        <p class="footer-meta">
+          <span id="year"></span> D&aacute;vid Straka. Designed to feel personal, not templated.
+        </p>
+      </footer>
+    </div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Apply animation to cards
-        document.querySelectorAll('.card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-    </script>
-</body>
+    <script src="./script.js"></script>
+  </body>
 </html>

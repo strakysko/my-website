@@ -1,0 +1,26 @@
+const yearNode = document.querySelector("#year");
+const revealNodes = document.querySelectorAll(".reveal");
+
+if (yearNode) {
+  yearNode.textContent = new Date().getFullYear();
+}
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.18,
+    rootMargin: "0px 0px -40px 0px",
+  }
+);
+
+revealNodes.forEach((node, index) => {
+  node.style.transitionDelay = `${Math.min(index * 45, 360)}ms`;
+  observer.observe(node);
+});
